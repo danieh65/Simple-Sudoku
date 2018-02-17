@@ -1,0 +1,38 @@
+﻿<Window x:Class="Sudoku2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sudoku2"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="615" Width="500" PreviewKeyDown="OnPreviewKeyDown" MinWidth="500" MinHeight="615">
+    <Border Padding="10">
+        <StackPanel>
+            <Grid Margin="0 0 0 10" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="newButton" Margin="0 0 10 0" Grid.Column="0" Content="New" Click="newButton_Click"></Button>
+                <Button x:Name="openButton" Grid.Column="1" Content="Open" Click="openButton_Click"></Button>
+                <Button x:Name="saveButton" Margin="10 0 0 0" Grid.Column="2" Content="Save" Click="saveButton_Click"></Button>
+            </Grid>
+            <Grid>
+                <Grid x:Name="sudokuGrid" HorizontalAlignment="Stretch" Margin="5" Height ="Auto" Grid.Row="0" Grid.Column="0" Panel.ZIndex="0" MaxWidth="700"/>
+                <Grid x:Name="sudokuBorders" HorizontalAlignment="Stretch" Margin="5" Height="Auto" Grid.Row="0" Grid.Column="0" Panel.ZIndex="1" MaxWidth="700"/>
+            </Grid>
+            <Grid x:Name="possibleValuesGrid" Margin="0 10 0 10" Grid.Row="0" Grid.Column="0"/>
+        </StackPanel>
+    </Border>
+</Window>
