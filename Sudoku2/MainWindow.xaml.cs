@@ -26,10 +26,12 @@ namespace Sudoku2
     /// </summary>
     public partial class MainWindow : Window
     {
+        // REVIEW: unclear what Utility is supposed to do?
         public object Utility { get; private set; }
         SudokuBoard sudokuBoard;
         SudokuBorder sudokuBorder;
         PossibleValuesDisplay possibleValues;
+
         Handlers handlers;
         public MainWindow()
         {
@@ -38,6 +40,8 @@ namespace Sudoku2
             sudokuBoard = new SudokuBoard(sudokuGrid);
             sudokuBorder = new SudokuBorder(sudokuBorders);
             possibleValues = new PossibleValuesDisplay(sudokuBoard, possibleValuesGrid);
+            // REVIEW: it was a good idea to separate the handler logic from the
+            // rest of the logic. I need to do something like this.
             handlers = new Handlers(sudokuBoard, possibleValues);
 
             sudokuBoard.InitializeGrid(handlers);
@@ -58,6 +62,8 @@ namespace Sudoku2
                 if (openFileDialog.ShowDialog() == true)
                 {
                     sudokuBoard.ImportGrid(openFileDialog.FileName, handlers);
+                    // REVIEW: I like that it checks the board on import
+                    // and notifies the user if the puzzle is already solved/invalid.
                     if (sudokuBoard.IsSolved)
                         MessageBox.Show("Solved puzzle loaded successfully!");
                     else if (!sudokuBoard.IsValid)
@@ -72,6 +78,9 @@ namespace Sudoku2
 
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
+            // REVIEW: I like the reuse of the new button for setting the initial values.
+            // The code here is a bit unclear, however, in this intention.
+            // Possibly making two handlers and toggling between them would be clearer?
             if (newButton.Content.Equals("New"))
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show("Creating a new puzzle will erase the current board. Are you sure you want to do this?", "New Puzzle Confirmation", MessageBoxButton.YesNo);
@@ -94,6 +103,7 @@ namespace Sudoku2
                 e.Handled = true;
             }
         }
+        // REVIEW: seems to be redundant from the handler class
         public static bool IsTextNumeric(string text)
         {
             Regex regex = new Regex("[1-9]+"); //regex that matches allowed text

@@ -13,6 +13,7 @@ namespace Sudoku2
 {
     public class Handlers
     {
+        //REVIEW: possibly make these private and add getter/setters if necessary?
         public SudokuBoard sudokuBoard;
         public PossibleValuesDisplay possibleValues;
         public Handlers(SudokuBoard board, PossibleValuesDisplay display)
@@ -22,6 +23,7 @@ namespace Sudoku2
         }
         public void textBox_Pasted(object sender, DataObjectPastingEventArgs e)
         {
+            // REVIEW: this logic is a bit confusing/verbose, perhaps it could be simplified.
             if (e.DataObject.GetDataPresent(typeof(String)))
             {
                 String text = (String)e.DataObject.GetData(typeof(String));
@@ -38,9 +40,13 @@ namespace Sudoku2
         }
         public void textBox_Changed(object sender, RoutedEventArgs e)
         {
+            // REVIEW: possibly mark cell as invalid before checking if the board is solved.
+            // this may or may not cause bugs. 
             if (sudokuBoard.IsSolved)
                 sudokuBoard.MarkBoardAsCompleted();
 
+            // REVIEW: consider including the sender cell in the interesecting cells for
+            // checking is valid to avoid duplication here
             (sender as TextBox).Foreground = sudokuBoard.IsCellValid(sender as TextBox) ? Brushes.Black : Brushes.Red;
 
             foreach (var cell in sudokuBoard.GetIntersectingCells(sender as TextBox))
@@ -48,6 +54,9 @@ namespace Sudoku2
         }
         public void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            // REVIEW: I really like this. I didn't think to use GotFocus and LostFocus
+            // instead of attempting to bind to the focused property. This is a much
+            // cleaner solution. 
             if (!((TextBox)sender).IsReadOnly)
             {
                 possibleValues.IsVisible = Visibility.Visible;
@@ -67,6 +76,7 @@ namespace Sudoku2
                     cell.Background = Brushes.Transparent;
             }
         }
+        // REVIEW: I like the use of these input filters to avoid code duplication. 
         #region Input Filters
         public void NumericOnly(object sender, TextCompositionEventArgs e)
         {

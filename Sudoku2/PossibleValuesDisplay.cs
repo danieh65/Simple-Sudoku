@@ -18,10 +18,12 @@ namespace Sudoku2
         {
             sourceBoard = s;
             grid = g;
+            // REVIEW: unclear why these are being cleared then re-added?
             grid.Children.Clear();
             grid.ColumnDefinitions.Clear();
             grid.RowDefinitions.Clear();
             grid.RowDefinitions.Add(new RowDefinition());
+            // REVIEW: a lot of this could probably go in the XAML itself.
             for (int i = 0; i < 9; i++)
             {
                 Border gridBorder = new Border
@@ -52,6 +54,8 @@ namespace Sudoku2
             {
                 switch (countValues[i])
                 {
+                    // REVIEW: possible bug in the case of two values, marked gray instead of
+                    // red, will write up a bug report if I can figure out what it's doing
                     case 0:
                         ((Border)grid.Children[i]).BorderBrush = Brushes.Black;
                         ((TextBlock)(((Border)grid.Children[i]).Child)).Foreground = Brushes.Black;
