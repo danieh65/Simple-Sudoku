@@ -14,7 +14,7 @@
         - [x] iii. New line represents the end of a line.
         - [ ] iv. Whitespace and empty lines should be ignored. `test_load_no_space.txt`, `test_load_odd_space.txt`
     - [x] b. The system will appropriately map the values to the UI squares. `test_load*.txt`
-    - [x] c. The UI will immediately display the state of the puzzle: normal, invalid, and solved. If the puzzle is invalid, the entire UI should be locked. The invalid squares should be marked red. `test_load_invalid.txt`, `test_load_solved.txt`, `test_load_near_solved.txt`
+    - [ ] c. The UI will immediately display the state of the puzzle: normal, invalid, and solved. If the puzzle is invalid, the entire UI should be locked. The invalid squares should be marked red. `test_load_invalid.txt`, `test_load_solved.txt`, `test_load_near_solved.txt`
     - [x] d. The UI will prompt the user when attempting to load a modified puzzle board. `test_load*.txt`
 - [x] 3. The UI will allow the user to save data to a file. It will correspond with the format displayed in 2.a.
 - [ ] 4. The UI will default to a blank puzzle. This will allow the user to enter in a puzzle easily. Additionally, the system will provide a way to set a puzzle to a blank puzzle.
