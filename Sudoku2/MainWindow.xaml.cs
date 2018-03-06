@@ -27,6 +27,7 @@ namespace Sudoku2
     public partial class MainWindow : Window
     {
         // REVIEW: unclear what Utility is supposed to do?
+        // RESPONSE: this object was in the cs file before I started working on it, so I didn't touch it. It is unused and should be deleted.
         public object Utility { get; private set; }
         SudokuBoard sudokuBoard;
         SudokuBorder sudokuBorder;
@@ -42,6 +43,8 @@ namespace Sudoku2
             possibleValues = new PossibleValuesDisplay(sudokuBoard, possibleValuesGrid);
             // REVIEW: it was a good idea to separate the handler logic from the
             // rest of the logic. I need to do something like this.
+            // RESPONSE: thanks! I wanted to separate as much as possible so that I was never referencing global variables except in MainWindow.
+            //      This did result in some weird interdependencies though.
             handlers = new Handlers(sudokuBoard, possibleValues);
 
             sudokuBoard.InitializeGrid(handlers);
@@ -65,6 +68,7 @@ namespace Sudoku2
                     sudokuBoard.ImportGrid(openFileDialog.FileName, handlers);
                     // REVIEW: I like that it checks the board on import
                     // and notifies the user if the puzzle is already solved/invalid.
+                    // RESPONSE: Thank you. I wanted to, on top of indicating the status with color, make the state of the board clear to the user 
                     if (sudokuBoard.IsSolved)
                         MessageBox.Show("Solved puzzle loaded successfully!");
                     else if (!sudokuBoard.IsValid)
@@ -82,6 +86,8 @@ namespace Sudoku2
             // REVIEW: I like the reuse of the new button for setting the initial values.
             // The code here is a bit unclear, however, in this intention.
             // Possibly making two handlers and toggling between them would be clearer?
+            // RESPONSE: I feel like that would be a clearer option. I think working with a switch-case statement (or perhaps enum) would be the easiest and clearest, 
+            //      but I didn't consider this; I figured that an if-else statement would suffice because there are only two states of the button.
             if (newButton.Content.Equals("New"))
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show("Creating a new puzzle will erase the current board. Are you sure you want to do this?", "New Puzzle Confirmation", MessageBoxButton.YesNo);
@@ -105,6 +111,7 @@ namespace Sudoku2
             }
         }
         // REVIEW: seems to be redundant from the handler class
+        // RESPONSE: it is redundant from the handler class (as there are 0 references). I forgot to delete this when migrating a chunk of code.
         public static bool IsTextNumeric(string text)
         {
             Regex regex = new Regex("[1-9]+"); //regex that matches allowed text

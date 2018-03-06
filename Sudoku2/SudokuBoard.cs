@@ -25,8 +25,10 @@ namespace Sudoku2
         public void InitializeGrid(Handlers handlers)
         {
             // REVIEW: extra empty scope here?
+            // RESPONSE: what?
             {
                 // REVIEW: a lot of this could go in the XAML itself.
+                // RESPONSE: I agree, but I wanted to minimize the amount of times I had to type the same line of code.
                 grid.Children.Clear();
                 grid.ColumnDefinitions.Clear();
                 grid.RowDefinitions.Clear();
@@ -70,6 +72,7 @@ namespace Sudoku2
         {
             // REVIEW: consider making a grid-size constant somewhere
             // and use that instead of 9.
+            // RESPONSE: I agree, that would be a good idea for the possibility of a differently-sized puzzle.
             List<List<int?>> gridList;
             gridList = new List<List<int?>>(9);
             for (int i = 0; i < gridList.Capacity; i++)
