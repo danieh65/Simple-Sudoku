@@ -1,21 +1,21 @@
-- [ ] 1. The UI will consist of a Classic Sudoku puzzle.
-    - [ ] a. The UI will disable the squares that have an initial value for a given puzzle. `test_load.txt`
-    - [ ] b. The UI will allow the user to enter in a single digit to all initially open squares on the board. Invalid keystrokes will be ignored.
-    - [ ] c. The UI square will display invalid entries in red (where a duplicate value exists). A wrong answer for a square should not automatically mark the field as red. `test_load_invalid.txt`
-    - [ ] d. The UI will set all intersecting squares to yellow when a square is selected.
-    - [ ] e. The UI will display all the candidate values for the selected square. 
-        - [ ] i. The exhibit below shows that numbers 1, 2, 5, 7, and 8 are still candidate numbers. Numbers 3, 4, 6, and 9 have been eliminated. (See original requirements for the image.)
+- [x] 1. The UI will consist of a Classic Sudoku puzzle.
+    - [x] a. The UI will disable the squares that have an initial value for a given puzzle. `test_load.txt`
+    - [x] b. The UI will allow the user to enter in a single digit to all initially open squares on the board. Invalid keystrokes will be ignored.
+    - [x] c. The UI square will display invalid entries in red (where a duplicate value exists). A wrong answer for a square should not automatically mark the field as red. `test_load_invalid.txt`, `test_load_near_solved.txt`
+    - [x] d. The UI will set all intersecting squares to yellow when a square is selected.
+    - [x] e. The UI will display all the candidate values for the selected square. 
+        - [x] i. The exhibit below shows that numbers 1, 2, 5, 7, and 8 are still candidate numbers. Numbers 3, 4, 6, and 9 have been eliminated. (See original requirements for the image.)
         - [ ] ii. If there is a duplicate value, the corresponding value should display red.
         - [ ] iii. If no cells are selected this display will not appear.
-- [ ] 2. The UI will allow the user to load data from a file. `test_load*.txt`
-    - [ ] a. The UI will be able to support the following format. (See original requirements for the image.)
-        - [ ] i. Digits represent the corresponding digits. 
-        - [ ] ii. X(s) represent blanks.
-        - [ ] iii. New line represents the end of a line.
-        - [ ] iv. Whitespace and empty lines should be ignored. `test_load_no_space.txt`
-    - [ ] b. The system will appropriately map the values to the UI squares. `test_load*.txt`
-    - [ ] c. The UI will immediately display the state of the puzzle: normal, invalid, and solved. If the puzzle is invalid, the entire UI should be locked. The invalid squares should be marked red. `test_load_invalid.txt`, `test_load_solved.txt`
-    - [ ] d. The UI will prompt the user when attempting to load a modified puzzle board. `test_load*.txt`
-- [ ] 3. The UI will allow the user to save data to a file. It will correspond with the format displayed in 2.a.
+- [x] 2. The UI will allow the user to load data from a file. `test_load*.txt`
+    - [x] a. The UI will be able to support the following format. (See original requirements for the image.)
+        - [x] i. Digits represent the corresponding digits. 
+        - [x] ii. X(s) represent blanks.
+        - [x] iii. New line represents the end of a line.
+        - [ ] iv. Whitespace and empty lines should be ignored. `test_load_no_space.txt`, `test_load_odd_space.txt`
+    - [x] b. The system will appropriately map the values to the UI squares. `test_load*.txt`
+    - [ ] c. The UI will immediately display the state of the puzzle: normal, invalid, and solved. If the puzzle is invalid, the entire UI should be locked. The invalid squares should be marked red. `test_load_invalid.txt`, `test_load_solved.txt`, `test_load_near_solved.txt`
+    - [x] d. The UI will prompt the user when attempting to load a modified puzzle board. `test_load*.txt`
+- [x] 3. The UI will allow the user to save data to a file. It will correspond with the format displayed in 2.a.
 - [ ] 4. The UI will default to a blank puzzle. This will allow the user to enter in a puzzle easily. Additionally, the system will provide a way to set a puzzle to a blank puzzle.
-- [ ] 5. The UI will indicate if you have successfully solved a puzzle. `test_load_solved.txt`
+- [x] 5. The UI will indicate if you have successfully solved a puzzle. `test_load_solved.txt`, `test_load_near_solved`
