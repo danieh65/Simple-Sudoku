@@ -25,7 +25,7 @@ namespace Sudoku2
         public void InitializeGrid(Handlers handlers)
         {
             // REVIEW: extra empty scope here?
-            // RESPONSE: what?
+            // RESPONSE: I think I deleted a conditional without removing the braces. This is an error.
             {
                 // REVIEW: a lot of this could go in the XAML itself.
                 // RESPONSE: I agree, but I wanted to minimize the amount of times I had to type the same line of code.
@@ -149,6 +149,8 @@ namespace Sudoku2
         public void MarkBoardAsCompleted()
         {
             // REVIEW: consider using var cell here for consistency
+            // RESPONSE: I think I was using TextBox as I was getting to know the grid.Children collection, but forgot to change this when I updated all my foreach loops to include .OfType<TextBox>()
+            //      I will definitely change TextBox to var
             foreach (TextBox cell in grid.Children.OfType<TextBox>())
             {
                 cell.Background = Brushes.Green;
@@ -175,6 +177,7 @@ namespace Sudoku2
         #endregion
         #region Board Properties
         // REVIEW: I like the use of .All here on the grid to check properties
+        // RESPONSE: Thank you! I was really happy that these could be simplified down to one (fairly) pretty line of code.
         public bool IsSolved => grid.Children.OfType<TextBox>().All(r => r.Text.Length > 0 && IsCellValid(r));
         public bool IsValid => grid.Children.OfType<TextBox>().All(r => IsCellValid(r));
         #endregion
@@ -195,6 +198,7 @@ namespace Sudoku2
         public int[] CountValues(TextBox selectedCell)
         {
             // REVIEW: I like that it computes the count of all the values at once. 
+            // RESPONSE: Thanks! I definitely would, however, like to find a way to iterate through the collection once as opposed to three times.
             int[] result = new int[9];
             var currentRowElements = GetIntersectingRowCells(selectedCell);
             var currentColumnElements = GetIntersectingColumnCells(selectedCell);
@@ -203,6 +207,8 @@ namespace Sudoku2
             {
                 // REVIEW: I think this should be using += rather than Math.Max
                 // if I follow the logic correctly, it might otherwise have issues
+                // RESPONSE: I originally used +=, but this would result in the total occurrences of the value in any intersecting box.
+                //      Here I am finding the greatest amount of occurrences within an intersecting group.
                 result[i] = Math.Max(result[i], currentRowElements.Where(r => int.TryParse((r).Text, out var n) && n == i + 1).Count());
                 result[i] = Math.Max(result[i], currentColumnElements.Where(r => int.TryParse((r).Text, out var n) && n == i + 1).Count());
                 result[i] = Math.Max(result[i], currentBoxElements.Where(r => int.TryParse((r).Text, out var n) && n == i + 1).Count());
@@ -219,10 +225,13 @@ namespace Sudoku2
                     // REVIEW: possibly clean up formatting of this if statement?
                     // a few bools delcared before might help, or putting operators
                     // at the end of each line to align the arguments on the left.
+                    // RESPONSE: I agree, I could/should declare three booleans to clarify. This may slow it down, however. At the very least, I should clean this up
                     if (Grid.GetRow(currentCell) == Grid.GetRow(selectedCell)
                         || Grid.GetColumn(currentCell) == Grid.GetColumn(selectedCell)
-                        || (Grid.GetRow(currentCell) / 3 == Grid.GetRow(selectedCell) / 3 && Grid.GetColumn(currentCell) / 3 == Grid.GetColumn(selectedCell) / 3))
+                        || (Grid.GetRow(currentCell) / 3 == Grid.GetRow(selectedCell) / 3 
+                            && Grid.GetColumn(currentCell) / 3 == Grid.GetColumn(selectedCell) / 3))
                         // REVIEW: Could the below three functions be used here instead?
+                        // RESPONSE: Yes, but I wanted to loop through the cells only once because this method is called often.
                         yield return currentCell;
                 }
             }
