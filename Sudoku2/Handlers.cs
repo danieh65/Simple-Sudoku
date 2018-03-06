@@ -14,6 +14,8 @@ namespace Sudoku2
     public class Handlers
     {
         //REVIEW: possibly make these private and add getter/setters if necessary?
+        //RESPONSE: because this program just consists of one window, I didn't consider 
+        //      public/private for these variables. I agree that they should be private.
         public SudokuBoard sudokuBoard;
         public PossibleValuesDisplay possibleValues;
         public Handlers(SudokuBoard board, PossibleValuesDisplay display)
@@ -24,6 +26,7 @@ namespace Sudoku2
         public void textBox_Pasted(object sender, DataObjectPastingEventArgs e)
         {
             // REVIEW: this logic is a bit confusing/verbose, perhaps it could be simplified.
+            // RESPONSE: I agree, I could probably simplify this into one if statement
             if (e.DataObject.GetDataPresent(typeof(String)))
             {
                 String text = (String)e.DataObject.GetData(typeof(String));
@@ -42,11 +45,14 @@ namespace Sudoku2
         {
             // REVIEW: possibly mark cell as invalid before checking if the board is solved.
             // this may or may not cause bugs. 
+            // RESPONSE: IsSolved enforces that all cells are valid, so I don't think this should cause bugs.
             if (sudokuBoard.IsSolved)
                 sudokuBoard.MarkBoardAsCompleted();
 
             // REVIEW: consider including the sender cell in the interesecting cells for
             // checking is valid to avoid duplication here
+            // RESPONSE: I think this may cause problems with cell coloring and other intersecting cell references.
+            //      Perhaps I could add the current cell to the temporary collection for this?
             (sender as TextBox).Foreground = sudokuBoard.IsCellValid(sender as TextBox) ? Brushes.Black : Brushes.Red;
 
             foreach (var cell in sudokuBoard.GetIntersectingCells(sender as TextBox))
@@ -57,6 +63,7 @@ namespace Sudoku2
             // REVIEW: I really like this. I didn't think to use GotFocus and LostFocus
             // instead of attempting to bind to the focused property. This is a much
             // cleaner solution. 
+            // RESPONSE: Thank you! I liked how useful got and lost focus were for managing application flow.
             if (!((TextBox)sender).IsReadOnly)
             {
                 possibleValues.IsVisible = Visibility.Visible;
@@ -77,6 +84,7 @@ namespace Sudoku2
             }
         }
         // REVIEW: I like the use of these input filters to avoid code duplication. 
+        // RESPONSE: Thanks. It definitely made it easier to manage.
         #region Input Filters
         public void NumericOnly(object sender, TextCompositionEventArgs e)
         {

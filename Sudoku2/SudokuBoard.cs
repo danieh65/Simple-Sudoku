@@ -82,15 +82,18 @@ namespace Sudoku2
             // rather than using null for missing values
             // another possibility is eliminating gridList and
             // just constructing the rows directly.
+            // RESPONSE: I agree, I think the best way would be to just directly build a 2D char array from grid.Children.
             foreach (var textBox in grid.Children.OfType<TextBox>())
                 gridList[Grid.GetRow(textBox)][Grid.GetColumn(textBox)] = int.TryParse(textBox.Text, out int n) ? (int?)n : null;
 
 
             // REVIEW: consider using a stringbuilder here instead
+            // RESPONSE: I think stringbuilder may require another nested loop, which I would like to avoid.
             List<string> rows = new List<string>();
             foreach (List<int?> gridRow in gridList)
             {
                 // REVIEW: might be better to use a stringbuilder here
+                // RESPONSE: I agree, this could definitely be done better
                 var row = gridRow.Select(r => r == null ? "X" : r.ToString()).ToList();
                 row.Insert(6, "\t");
                 row.Insert(3, "\t");
@@ -98,6 +101,7 @@ namespace Sudoku2
             }
             // REVIEW: unclear what these calls are doing
             // inserting newlines via empty strings in the list?
+            // RESPONSE: these are inserting newlines into the collection to match the format. It could probably be done much better.
             rows.Insert(6, "");
             rows.Insert(3, "");
 
@@ -109,6 +113,8 @@ namespace Sudoku2
             // consider simplifying or breaking out into helper functions where necessary
             // I just stripped all the whitespace (and newlines) and read each character into 
             // the board directly.
+            // RESPONSE: I stripped the whitespace from my input but keep the 2D structure of the format
+            //      I think that would likely be much easier to just strip all whitespace and import data from there.
             List<List<int?>> gridList;
             gridList = new List<List<int?>>(9);
             for (int i = 0; i < gridList.Capacity; i++)

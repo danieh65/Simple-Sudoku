@@ -16,6 +16,8 @@ namespace Sudoku2
         public SudokuBorder(Grid g)
         {
             // REVIEW: this could also be in the XAML I think.
+            // RESPONSE: I agree; I wanted to avoid writing the same line of code nine times,
+            //      but I think it ended up with more, uglier code than if I just did it in the XAML.
             borderGrid = g;
             borderGrid.Children.Clear();
             borderGrid.RowDefinitions.Clear();
