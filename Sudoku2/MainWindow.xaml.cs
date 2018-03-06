@@ -61,6 +61,7 @@ namespace Sudoku2
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 if (openFileDialog.ShowDialog() == true)
                 {
+                    newButton.Content = "New";
                     sudokuBoard.ImportGrid(openFileDialog.FileName, handlers);
                     // REVIEW: I like that it checks the board on import
                     // and notifies the user if the puzzle is already solved/invalid.

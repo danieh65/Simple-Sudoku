@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="newButton" Margin="0 0 10 0" Grid.Column="0" Content="New" Click="newButton_Click"></Button>
+                <Button x:Name="newButton" Margin="0 0 10 0" Grid.Column="0" Content="Start" Click="newButton_Click"></Button>
                 <Button x:Name="openButton" Grid.Column="1" Content="Open" Click="openButton_Click"></Button>
                 <Button x:Name="saveButton" Margin="10 0 0 0" Grid.Column="2" Content="Save" Click="saveButton_Click"></Button>
             </Grid>
